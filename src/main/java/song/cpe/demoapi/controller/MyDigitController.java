@@ -16,7 +16,7 @@ public class MyDigitController {
     private Logger logger = LoggerFactory.getLogger(MyDigitController.class.getName());
 
     @GetMapping(value = "/isOddNumber/{digit}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResultResponse> isUpperLetter(
+    public ResponseEntity<ResultResponse> isOddNumber(
             @PathVariable Integer digit
     ) {
 
