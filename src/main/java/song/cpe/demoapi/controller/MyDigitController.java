@@ -18,7 +18,7 @@ public class MyDigitController {
     @GetMapping(value = "/isOddNumber/{digit}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultResponse> isUpperLetter(
             @PathVariable Integer digit
-            ) {
+    ) {
 
         logger.info("digit: {}", digit);
         ResultResponse response = new ResultResponse();
@@ -26,7 +26,7 @@ public class MyDigitController {
         return ResponseEntity.ok(response);
     }
 
-    class ResultResponse{
+    class ResultResponse {
 
         boolean result;
 
