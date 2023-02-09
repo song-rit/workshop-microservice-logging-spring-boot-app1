@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/digit")
-public class GreetingController {
+public class MyDigitController {
 
-    private Logger logger = LoggerFactory.getLogger(GreetingController.class.getName());
+    private Logger logger = LoggerFactory.getLogger(MyDigitController.class.getName());
 
     @GetMapping(value = "/isOddNumber/{digit}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResultResponse> isUpperLetter(
