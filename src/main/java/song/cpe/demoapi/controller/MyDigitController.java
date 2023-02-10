@@ -33,10 +33,6 @@ public class MyDigitController {
         oddNumberCount = Counter.builder("odd_number_counter")
                 .description("Odd number of request")
                 .register(registry);
-
-        oddNumberCount = Counter.builder("odd_number_counter")
-                .description("Odd number of request")
-                .register(registry);
     }
 
     @GetMapping(value = "/isEvenNumber/{digit}", produces = MediaType.APPLICATION_JSON_VALUE)

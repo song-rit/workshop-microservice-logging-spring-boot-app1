@@ -3,7 +3,7 @@
 
 
 
-#How to run
+# How to run
 ./gradlew bootRun
 
 # how to run prometheus
