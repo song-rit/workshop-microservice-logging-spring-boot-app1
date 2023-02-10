@@ -1,5 +1,7 @@
 package song.cpe.demoapi.controller;
 
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -15,14 +17,48 @@ public class MyDigitController {
 
     private Logger logger = LoggerFactory.getLogger(MyDigitController.class.getName());
 
-    @GetMapping(value = "/isOddNumber/{digit}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResultResponse> isOddNumber(
+    Counter requestCount;
+    Counter evenNumberCount;
+    Counter oddNumberCount;
+
+    public MyDigitController(MeterRegistry registry) {
+        requestCount = Counter.builder("request_counter")
+                .description("Number of request")
+                .register(registry);
+
+        evenNumberCount = Counter.builder("even_number_counter")
+                .description("even number of request")
+                .register(registry);
+
+        oddNumberCount = Counter.builder("odd_number_counter")
+                .description("Odd number of request")
+                .register(registry);
+
+        oddNumberCount = Counter.builder("odd_number_counter")
+                .description("Odd number of request")
+                .register(registry);
+    }
+
+    @GetMapping(value = "/isEvenNumber/{digit}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResultResponse> isEvenNumber(
             @PathVariable Integer digit
     ) {
+        requestCount.increment();
 
         logger.info("digit: {}", digit);
+
         ResultResponse response = new ResultResponse();
-        response.result = true;
+
+        if(digit % 2 == 0) {
+            evenNumberCount.increment();
+            logger.info("number is even number: {}", digit);
+            response.result = true;
+        } else {
+            oddNumberCount.increment();
+            logger.info("number is odd number: {}", digit);
+            response.result = false;
+        }
+
         return ResponseEntity.ok(response);
     }
 
